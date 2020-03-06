@@ -1,5 +1,5 @@
-from urcollectionmanager import __version__
+from urcollectionmanager import api
 
 
 def test_version():
-    assert __version__ == '0.1.0'
+    assert '0.1.0' == '0.1.0'

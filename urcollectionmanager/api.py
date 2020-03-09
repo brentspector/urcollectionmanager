@@ -1,15 +1,30 @@
 from .auth import create_auth_url
-from .http import execute_http_call
+from .http import execute_http_call, convert_html_to_soup
+from .history import get_history_url, find_purchases
+from .purchase import Purchase
+
+from requests import Session, Response
+from typing import Optional
+from bs4 import BeautifulSoup
 
 
-# Connect to UR
-def session_connect_to_ur(session, username, password, url=None):
+def session_connect_to_ur(session: Session, username: str, password: str, url: Optional[str] = None) -> Response:
     """Creates an authenticated session with Urban Rivals"""
     return execute_http_call(session, create_auth_url(username, password, url))
 
-# Get Purchase History (Soup)
 
-# Convert Purchase History
+def get_purchase_history(session: Session, num_pages: int, url: Optional[str] = None) -> list[BeautifulSoup]:
+    """Returns a list of Beautiful Soup objects
+    representing each Purchase History page"""
+    return [convert_html_to_soup(execute_http_call(session, hist_url))
+            for hist_url
+            in get_history_url(num_pages, url)]
+
+
+def convert_purchase_history(history_pages: list[BeautifulSoup]) -> list[Purchase]:
+    """Returns a list of Purchases for a given
+    list of Beautiful Soup history pages"""
+    return [find_purchases(page) for page in history_pages]
 
 # Write History to File
 

@@ -24,4 +24,3 @@ def session_connect_to_ur(session, username, password, url=None):
 # TODO: Attempt to use UR API
 # TODO: Check if session token can be saved permanently
 # This will skip using market scraper
-

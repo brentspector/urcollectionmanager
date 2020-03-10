@@ -15,6 +15,7 @@ def test_resource_dir():
     """Location of Test Resource files"""
     return os.path.join(
         os.path.dirname(os.path.realpath(__file__)),
+        'tests',
         'resources',
     )
 

@@ -1,11 +1,12 @@
 import itertools
 from .purchase import Purchase
 from urllib.parse import urlencode
+from typing import List
 BASE_HISTORY_URL = "https://www.urban-rivals.com/market/history.php?"
 BASE_LEVEL_STAR_IMAGE_URL = "https://s.acdn.ur-img.com/img/v3/card/icon-star-on.png"
 
 
-def get_history_url(num_pages: int, url) -> list[str]:
+def get_history_url(num_pages: int, url) -> List[str]:
     """Returns a list of urls for each history page"""
     url = BASE_HISTORY_URL if url is None else url
     return [url + urlencode({'action': 'purchasehistory', 'page': page})

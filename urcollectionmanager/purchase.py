@@ -66,7 +66,7 @@ class Purchase:
                  name: Optional[str] = "",
                  id: Optional[int] = 0,
                  price: Optional[int] = 0,
-                 level: Optional[int] = 1):
+                 level: Optional[int] = 0):
         self.name = name
         self.id = id
         self.price = price

@@ -4,7 +4,7 @@ from .history import get_history_url, find_purchases
 from .purchase import Purchase
 
 from requests import Session, Response
-from typing import Optional
+from typing import Optional, List
 from bs4 import BeautifulSoup
 
 
@@ -13,7 +13,7 @@ def session_connect_to_ur(session: Session, username: str, password: str, url: O
     return execute_http_call(session, create_auth_url(username, password, url))
 
 
-def get_purchase_history(session: Session, num_pages: int, url: Optional[str] = None) -> list[BeautifulSoup]:
+def get_purchase_history(session: Session, num_pages: int, url: Optional[str] = None) -> List[BeautifulSoup]:
     """Returns a list of Beautiful Soup objects
     representing each Purchase History page"""
     return [convert_html_to_soup(execute_http_call(session, hist_url))
@@ -21,7 +21,7 @@ def get_purchase_history(session: Session, num_pages: int, url: Optional[str] = 
             in get_history_url(num_pages, url)]
 
 
-def convert_purchase_history(history_pages: list[BeautifulSoup]) -> list[Purchase]:
+def convert_purchase_history(history_pages: List[BeautifulSoup]) -> List[List[Purchase]]:
     """Returns a list of Purchases for a given
     list of Beautiful Soup history pages"""
     return [find_purchases(page) for page in history_pages]

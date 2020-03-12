@@ -27,4 +27,5 @@ def create_purchase(row):
     id = row.a['data-character-id']
     price = "".join(next(itertools.islice(row.stripped_strings, 3, 4)).split())
     level = len(row.find_all(src=BASE_LEVEL_STAR_IMAGE_URL))
-    return Purchase(name, id, price, level)
+    purchase_date = next(itertools.islice(row.stripped_strings, 4, 5))
+    return Purchase(name, id, price, level, purchase_date)

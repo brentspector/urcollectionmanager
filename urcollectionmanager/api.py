@@ -1,4 +1,5 @@
 from .auth import create_auth_url
+from .database import create_all
 from .http import execute_http_call, convert_html_to_soup
 from .history import get_history_url, find_purchases
 from .purchase import Purchase
@@ -29,6 +30,10 @@ def convert_purchase_history(history_pages: List[BeautifulSoup]) -> List[List[Pu
 # Write History to File
 
 # Connect to DB
+
+# Initialize DB
+def create_database():
+    create_all()
 
 # Write History to DB
 

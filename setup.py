@@ -33,7 +33,9 @@ setup(
     packages=[],
     package_dir={"": "."},
     package_data={},
-    install_requires=['bs4==0.*,>=0.0.1', 'requests==2.*,>=2.23.0'],
+    install_requires=[
+        'bs4==0.*,>=0.0.1', 'requests==2.*,>=2.23.0', 'sqlalchemy==1.*,>=1.3.15'
+    ],
     extras_require={
         "dev": [
             "autopep8==1.*,>=1.5.0", "commitizen==1.*,>=1.16.4",

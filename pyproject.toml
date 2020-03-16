@@ -29,6 +29,7 @@ aggressive = 2
 name = "cz_conventional_commits"
 version = "0.1.0"
 tag_format = "0.1.0"
+
 [build-system]
 requires = ["poetry>=1.0.5"]
 build-backend = "poetry.masonry.api"

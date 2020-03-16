@@ -140,6 +140,14 @@ python-versions = "*"
 version = "3.0.12"
 
 [[package]]
+category = "main"
+description = "Secure hash and message digest algorithm library"
+name = "hashlib"
+optional = false
+python-versions = "*"
+version = "20081119"
+
+[[package]]
 category = "dev"
 description = "File identification library for Python"
 name = "identify"
@@ -432,7 +440,7 @@ python-versions = "*"
 version = "0.1.8"
 
 [metadata]
-content-hash = "ce47a1bbc79c74333ef6f37af226d3052212a9045a602307742fb04720b50621"
+content-hash = "f7861f9083d10f3216440663483e167800e173c69d008351245407e6f97c1c15"
 python-versions = "==3.*,>=3.8.0"
 
 [metadata.files]
@@ -489,6 +497,10 @@ distlib = [
 filelock = [
     {file = "filelock-3.0.12-py3-none-any.whl", hash = "sha256:929b7d63ec5b7d6b71b0fa5ac14e030b3f70b75747cef1b10da9b879fef15836"},
     {file = "filelock-3.0.12.tar.gz", hash = "sha256:18d82244ee114f543149c66a6e0c14e9c4f8a1044b5cdaadd0f82159d6a6ff59"},
+]
+hashlib = [
+    {file = "hashlib-20060408a.win32-py2.4-openssl.exe", hash = "sha256:6ece4dbc12a71cd24793e5a06ba72f0ee0142affea6593842e5520f400ec9dbb"},
+    {file = "hashlib-20081119.zip", hash = "sha256:419de2fd10ae71ed9c6adcb55903f116abd1d8acc8c814dfd5f839b4d5013e38"},
 ]
 identify = [
     {file = "identify-1.4.11-py2.py3-none-any.whl", hash = "sha256:1222b648251bdcb8deb240b294f450fbf704c7984e08baa92507e4ea10b436d5"},

@@ -1,14 +1,16 @@
 from .database import Base
 from datetime import date, timedelta, datetime
 from typing import Optional
-from sqlalchemy import Column, String, Integer, DATETIME
+from sqlalchemy import Column, String, Integer, DATETIME, LargeBinary, event
 from sqlalchemy.ext.hybrid import hybrid_property
+from hashlib import sha1
 
 
 class Purchase(Base):
     __tablename__ = "purchase"
+    hash_id = Column(LargeBinary, primary_key=True)
     name = Column(String(255))
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer)
     price = Column(Integer)
     level = Column(Integer)
     _purchase_date = Column(DATETIME)
@@ -21,7 +23,7 @@ class Purchase(Base):
     def purchase_date(self, purchase_date):
         # Friday 06/03, 20:39
         # Today at 11:30
-        if type(purchase_date) is datetime:
+        if isinstance(purchase_date, datetime):
             self._purchase_date = purchase_date
             return
         split_date = str(purchase_date).split()
@@ -48,6 +50,7 @@ class Purchase(Base):
         self.price = int(price)
         self.level = int(level)
         self.purchase_date = purchase_date
+        self.hash_id = create_hash(self)
 
     def __repr__(self):
         return 'id: ' + repr(self.id)
@@ -60,6 +63,17 @@ class Purchase(Base):
             # don't attempt to compare against unrelated types
             return NotImplemented
 
-        # Check all values that are not "instance" ex _sa_instance_state
-        return all(self.__getattribute__(item[0]) == other.__getattribute__(item[0])
-                   for item in vars(self).items() if "instance" not in item[0])
+        return self.hash_id == other.hash_id
+
+
+@event.listens_for(Purchase, 'before_insert')
+@event.listens_for(Purchase, 'before_update')
+def receive_before_insert(mapper, connection, target):
+    """Update hash before insert"""
+    target.hash_id = create_hash(target)
+
+
+def create_hash(target):
+    hash_columns = [target.id, target.price, target.level, target.purchase_date]
+    bytes_hash_target = "".join([str(item) for item in hash_columns]).encode()
+    return sha1(bytes_hash_target).digest()

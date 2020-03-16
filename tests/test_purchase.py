@@ -3,6 +3,7 @@ from datetime import date, time, datetime, timedelta
 
 FULL_PURCHASE = {"name": "Bob", "id": 1, "price": 1, "level": 1, "purchase_date": "Tuesday 14/01, 11:30"}
 
+
 def test_init_no_args():
     """Happy Path - Init No Args"""
     obj = Purchase()
@@ -23,13 +24,16 @@ def test_init_full_arg():
     assert obj.level == 1
     assert obj.purchase_date == datetime(2020, 1, 14, 11, 30)
 
+
 def test_purchase_date_today():
     obj = Purchase(purchase_date="Today at 12:34")
     assert obj.purchase_date == datetime.combine(date.today(), time(12, 34))
 
+
 def test_purchase_date_yesterday():
     obj = Purchase(purchase_date="Yesterday at 12:34")
-    assert obj.purchase_date == datetime.combine(date.today()-timedelta(days=1), time(12, 34))
+    assert obj.purchase_date == datetime.combine(date.today() - timedelta(days=1), time(12, 34))
+
 
 def test_purchase_date_with_year():
     obj = Purchase(purchase_date="Sunday 17/03/2019, 20:36")

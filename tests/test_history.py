@@ -1,5 +1,6 @@
 from urcollectionmanager import history
 from urcollectionmanager import http
+from datetime import datetime
 
 
 def test_get_history_url():
@@ -21,3 +22,4 @@ def test_create_purchases(mocked_history):
     soup = http.convert_html_to_soup(mocked_history)
     res = history.create_purchase(soup.tbody.tr)
     assert res.name == "Gatline"
+    assert res.purchase_date == datetime(2020, 3, 6, 10, 39)

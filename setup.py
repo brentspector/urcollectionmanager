@@ -21,7 +21,7 @@ if os.path.exists(readme_path):
 setup(
     long_description=readme,
     name='urcollectionmanager',
-    version='0.1.0',
+    version='1.0.0',
     description='API for Urban Rivals collection management',
     python_requires='==3.*,>=3.8.0',
     project_urls={
@@ -33,7 +33,9 @@ setup(
     packages=[],
     package_dir={"": "."},
     package_data={},
-    install_requires=['bs4==0.*,>=0.0.1', 'requests==2.*,>=2.23.0'],
+    install_requires=[
+        'bs4==0.*,>=0.0.1', 'requests==2.*,>=2.23.0', 'sqlalchemy==1.*,>=1.3.15'
+    ],
     extras_require={
         "dev": [
             "autopep8==1.*,>=1.5.0", "commitizen==1.*,>=1.16.4",

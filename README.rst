@@ -1,8 +1,34 @@
 Urban Rivals Collection Management API (urcollectionmanager)
 ============================================================
 
-Something something
+A module to support reading player purchase history data and
+storing it in a database.
 
+Basic Use:
+    #) Import `api` from `urcollectionmanager`
+    #) Create a request.Session and pass it, along with
+       your credentials to `session_connect_to_ur`
+    #) Pass that same session (now authenticated) to
+       `get_purchase_history` along with the number of
+       pages to scrape.
+    #) Pass the result to `convert_purchase_history`
+
+        Optionally: Pass result to your own HTML parser.
+
+    #) You now have a list of Purchase objects that contain
+       all relevant information available from the purchase
+       history page.
+
+Database Use:
+    #) Run `connect_and_initialize_database` if you have a
+       particular database location you want to connect to.
+       By default this will connect to `data/collection.sqlite`
+    #) Pass a list of Purchase objects to `write_history_to_database`
+    #) Once the database has Purchase objects in it, you can
+       run `get_history_from_database` to retrieve them.
+
+Dev
+---
 How To Use Tools:
     Poetry_
         - To run the project (preferably configure venv first)
@@ -26,7 +52,6 @@ How To Use Tools:
         >>> cz c
 
     - More options can be found under options under Commitizen_
-    - See if structure is good.
 
     PreCommit_
         Update .pre-commit-config.yaml, then run
@@ -38,10 +63,8 @@ How To Use Tools:
 
 TODO:
 
-- Screenscraper UR for player data (need to test)
 - Use UR-API_ to collect player data. UR-API-Example_
 - Default to file output (excel or some form of that)
-- Enable link to database
 - Testing (pytest, Coverage-py_)
 - Documentation (Sphinx_)
 

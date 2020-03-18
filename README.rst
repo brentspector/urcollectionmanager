@@ -24,6 +24,10 @@ Database Use:
        particular database location you want to connect to.
        By default this will connect to `data/collection.sqlite`
     #) Pass a list of Purchase objects to `write_history_to_database`
+
+        If using `convert_purchase_history`, you will need to flatten
+        the list of lists
+
     #) Once the database has Purchase objects in it, you can
        run `get_history_from_database` to retrieve them.
 

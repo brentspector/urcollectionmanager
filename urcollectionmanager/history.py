@@ -28,4 +28,7 @@ def create_purchase(row):
     price = "".join(next(itertools.islice(row.stripped_strings, 3, 4)).split())
     level = len(row.find_all(src=BASE_LEVEL_STAR_IMAGE_URL))
     purchase_date = next(itertools.islice(row.stripped_strings, 4, 5))
+    if "Private" in purchase_date:
+        # Private purchases puts the date in the next column
+        purchase_date = next(itertools.islice(row.stripped_strings, 5, 6))
     return Purchase(name, id, price, level, purchase_date)

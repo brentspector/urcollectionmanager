@@ -26,8 +26,15 @@ class Purchase(Base):
         if isinstance(purchase_date, datetime):
             self._purchase_date = purchase_date
             return
+        if ":" not in purchase_date:
+            # If purchased at midnight GMT, timestamp is omitted
+            # Ex  	Wednesday 05/06/2019
+            purchase_date += ", 00:00"
         split_date = str(purchase_date).split()
-        purch_date = datetime.combine(datetime.now(), datetime.strptime(split_date[2], "%H:%M").time())
+        try:
+            purch_date = datetime.combine(datetime.now(), datetime.strptime(split_date[2], "%H:%M").time())
+        except BaseException:
+            raise ValueError(f"Failed to convert {purchase_date}: Ended up with {split_date}")
         if split_date[0] == "Yesterday":
             purch_date -= timedelta(days=1)
         elif split_date[1] != "at":

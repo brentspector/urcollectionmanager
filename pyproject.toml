@@ -28,7 +28,7 @@ aggressive = 2
 [tool.commitizen]
 name = "cz_conventional_commits"
 version = "1.0.0"
-tag_format = "0.1.0"
+tag_format = "v1.0.0"
 
 [build-system]
 requires = ["poetry>=1.0.5"]

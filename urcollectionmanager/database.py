@@ -83,7 +83,7 @@ def _refresh_obj(session, obj):
 
 
 def _primary_key_deduplicate(keys, dup_list):
-    """Generator providing items that are not dupicates"""
+    """Generator providing items that are not duplicates"""
     seen = set()
     for item in dup_list:
         compare = tuple(getattr(item, key) for key in keys)

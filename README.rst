@@ -4,7 +4,7 @@ Urban Rivals Collection Management API (urcollectionmanager)
 A module to support reading player purchase history data and
 storing it in a database.
 
-Basic Use:
+Puchases History Use:
     #) Import `api` from `urcollectionmanager`
     #) Create a request.Session and pass it, along with
        your credentials to `session_connect_to_ur`
@@ -19,6 +19,21 @@ Basic Use:
        all relevant information available from the purchase
        history page.
 
+Missions Use:
+    #) Import `api` from `urcollectionmanager`
+    #) Create a request.Session and pass it, along with
+       your credentials to `session_connect_to_ur`
+    #) Pass that same session (now authenticated) to
+       `get_missions_list` along with the mission category
+       to find. An empty string returns everything.
+    #) Pass the result to `convert_missions`
+
+        Optionally: Pass result to your own HTML parser.
+
+    #) You now have a list of Mission objects that contain
+       all relevent information available from the missions
+       page.
+
 Database Use:
     #) Run `connect_and_initialize_database` if you have a
        particular database location you want to connect to.
@@ -30,6 +45,10 @@ Database Use:
 
     #) Once the database has Purchase objects in it, you can
        run `get_history_from_database` to retrieve them.
+
+    #) Similarly, you can run `write_missions_to_database` to write
+       Mission objects and `get_missions_from_database` to read mission
+       Mission objects from the same database as Purchases.
 
 Dev
 ---

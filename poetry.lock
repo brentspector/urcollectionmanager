@@ -104,7 +104,7 @@ description = "Python commitizen client tool"
 name = "commitizen"
 optional = false
 python-versions = ">=3.6,<4.0"
-version = "1.17.0"
+version = "1.22.2"
 
 [package.dependencies]
 colorama = ">=0.4.1,<0.5.0"
@@ -114,6 +114,7 @@ packaging = ">=19,<21"
 questionary = ">=1.4.0,<2.0.0"
 termcolor = ">=1.1,<2.0"
 tomlkit = ">=0.5.3,<0.6.0"
+typing = ">=3.7.4,<4.0.0"
 
 [[package]]
 category = "dev"
@@ -393,6 +394,14 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.5.11"
 
 [[package]]
+category = "dev"
+description = "Type Hints for Python"
+name = "typing"
+optional = false
+python-versions = "*"
+version = "3.7.4.1"
+
+[[package]]
 category = "main"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 name = "urllib3"
@@ -476,8 +485,8 @@ colorama = [
     {file = "colorama-0.4.3.tar.gz", hash = "sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"},
 ]
 commitizen = [
-    {file = "commitizen-1.17.0-py3-none-any.whl", hash = "sha256:77102722553cfa85b119b31ffd985c36b4fc7bae42e77bfcae49f5ad34a248b0"},
-    {file = "commitizen-1.17.0.tar.gz", hash = "sha256:e93d71809414a38657daa894fb1b892c7ef38de1725ac4b33cef4c0915259f71"},
+    {file = "commitizen-1.22.2-py3-none-any.whl", hash = "sha256:ecbbc35ce81ee1808ca1f524190bf3d32caae1f744632bce2dbbf30dd1308e1d"},
+    {file = "commitizen-1.22.2.tar.gz", hash = "sha256:071ca483fe73319642686fdd81b3f2d0443cc17bc84269da7b586ec52d7b4f21"},
 ]
 decli = [
     {file = "decli-0.5.1-py3-none-any.whl", hash = "sha256:36dbda6cc9fdd7880b7ee141bccab048672307f4f419072aa1a394b01cb10a32"},
@@ -619,6 +628,11 @@ toml = [
 tomlkit = [
     {file = "tomlkit-0.5.11-py2.py3-none-any.whl", hash = "sha256:4e1bd6c9197d984528f9ff0cc9db667c317d8881288db50db20eeeb0f6b0380b"},
     {file = "tomlkit-0.5.11.tar.gz", hash = "sha256:f044eda25647882e5ef22b43a1688fb6ab12af2fc50e8456cdfc751c873101cf"},
+]
+typing = [
+    {file = "typing-3.7.4.1-py2-none-any.whl", hash = "sha256:c8cabb5ab8945cd2f54917be357d134db9cc1eb039e59d1606dc1e60cb1d9d36"},
+    {file = "typing-3.7.4.1-py3-none-any.whl", hash = "sha256:f38d83c5a7a7086543a0f649564d661859c5146a85775ab90c0d2f93ffaa9714"},
+    {file = "typing-3.7.4.1.tar.gz", hash = "sha256:91dfe6f3f706ee8cc32d38edbbf304e9b7583fb37108fef38229617f8b3eba23"},
 ]
 urllib3 = [
     {file = "urllib3-1.25.8-py2.py3-none-any.whl", hash = "sha256:2f3db8b19923a873b3e5256dc9c2dedfa883e33d87c690d9c7913e1f40673cdc"},

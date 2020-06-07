@@ -2,6 +2,8 @@ from .auth import create_auth_url
 from .database import init_sqlite_db, add_all, get_all
 from .http import execute_http_call, convert_html_to_soup
 from .history import get_history_url, find_purchases
+from .missions import get_mission_url, find_missions
+from .mission import Mission
 from .purchase import Purchase
 
 from requests import Session, Response
@@ -70,6 +72,47 @@ def get_history_from_database(filters: Optional[Dict[str, any]] = {}) -> List[Pu
         filters["_purchase_date"] = filters.pop("purchase_date")
     return get_all(Purchase, filters)
 
+
+def get_missions_list(session: Session, category: str, url: Optional[str] = None) -> BeautifulSoup:
+    """
+    Returns a BeautifulSoup object with the requested missions page data
+    :param session: The authenticated session
+    :param category: Category, if any, to filter missions by
+    :param url: Optional URL to direct requests to
+    :return: BeautifulSoup of missions page
+    """
+    mission_url = get_mission_url(0, category, 'all', url)
+    return convert_html_to_soup(execute_http_call(session, mission_url))
+
+
+def convert_missions(missions: BeautifulSoup) -> List[Mission]:
+    """
+    Create Mission objects based on contents of BeautifulSoup object
+    :param missions: The BeautifulSoup object to parse
+    :return: List of Mission objects
+    """
+    return find_missions(missions)
+
+
+def write_missions_to_database(missions: List[Mission], batch_size=100):
+    """
+    Writes a list of Missions to database. This process uses a hash
+    of name and description to avoid duplicates. Name changes (CR, MT)
+    not supported at this time.
+    :param purchases: List of Mission objects to add to the database
+    :param batch_size: How many Mission objects should be persisted at one time. Default 100.
+    :return: None
+    """
+    add_all(Mission, missions, batch_size)
+
+
+def get_missions_from_database(filters: Optional[Dict[str, any]] = {}) -> List[Mission]:
+    """
+    Retrieves a list of Missions from the database based on filters provided
+    :param filters: A set of equality filters based on Mission attributes.
+    :return: List[Mission]
+    """
+    return get_all(Mission, filters)
 # TODO: Attempt to use UR API
 # TODO: Check if session token can be saved permanently
 # This will skip using market scraper

@@ -1,4 +1,4 @@
-from urcollectionmanager import api, database, purchase
+from urcollectionmanager import api, database, purchase, mission
 from requests import Session
 from unittest.mock import Mock
 from pathlib import PureWindowsPath, PurePosixPath
@@ -129,4 +129,87 @@ def test_get_history_from_database_with_filters(monkeypatch, mocked_history):
     finally:
         with database.get_session() as session:
             session.query(purchase.Purchase).delete()
+
+
+def test_get_missions_list(monkeypatch, mocked_missions):
+    """Happy Path - History Pages Fetched"""
+    monkeypatch.setattr(Session, "get", lambda a, b: mocked_missions)
+    assert api.get_missions_list(Session(), "flash")
+
+
+def test_convert_missions(monkeypatch, mocked_missions):
+    """Happy Path - Get List of Missions"""
+    monkeypatch.setattr(Session, "get", lambda a, b: mocked_missions)
+    res = api.get_missions_list(Session(), "flash")
+    missions = api.convert_missions(res)
+    assert len(missions) == 10
+    assert missions[0].name == "BLACK MARKET - 500 Glorg-> 50 Millions"
+
+
+def test_write_missions_to_database(monkeypatch, mocked_missions):
+    monkeypatch.setattr(Session, "get", lambda a, b: mocked_missions)
+    page = api.get_missions_list(Session(), "flash")
+    missions = api.convert_missions(page)
+    mission_hashes = [miss.hash_id for miss in missions]
+    api.connect_and_initialize_database("sqlite", "data/test_collection.sqlite")
+    api.write_missions_to_database(missions)
+    try:
+        with database.get_session() as session:
+            res = [item[0] for item in session.query(mission.Mission.hash_id).all()]
+            for hash_id in mission_hashes:
+                assert hash_id in res
+    finally:
+        with database.get_session() as session:
+            session.query(mission.Mission).delete()
+
+
+def test_write_large_missions_to_database(monkeypatch, mocked_missions):
+    monkeypatch.setattr(Session, "get", lambda a, b: mocked_missions)
+    page = api.get_missions_list(Session(), "flash")
+    missions = api.convert_missions(page)
+    shuffle(missions)
+    mission_hashes = [miss.hash_id for miss in missions]
+    api.connect_and_initialize_database("sqlite", "data/test_collection.sqlite")
+    api.write_missions_to_database(missions, 5)
+    try:
+        with database.get_session() as session:
+            res = [item[0] for item in session.query(mission.Mission.hash_id).all()]
+            assert len(res) == 10
+            for hash_id in mission_hashes:
+                assert hash_id in res
+    finally:
+        with database.get_session() as session:
+            session.query(mission.Mission).delete()
+
+
+def test_get_missions_from_database(monkeypatch, mocked_missions):
+    monkeypatch.setattr(Session, "get", lambda a, b: mocked_missions)
+    page = api.get_missions_list(Session(), "flash")
+    missions = api.convert_missions(page)
+    api.connect_and_initialize_database("sqlite", "data/test_collection.sqlite")
+    api.write_missions_to_database(missions)
+    res = api.get_missions_from_database()
+    try:
+        assert res[0].hash_id
+        assert res[0].name != ""
+        assert res[0].goal > 0
+    finally:
+        with database.get_session() as session:
+            session.query(mission.Mission).delete()
+
+
+def test_get_missions_from_database_with_filters(monkeypatch, mocked_missions):
+    monkeypatch.setattr(Session, "get", lambda a, b: mocked_missions)
+    page = api.get_missions_list(Session(), "flash")
+    missions = api.convert_missions(page)
+    api.connect_and_initialize_database("sqlite", "data/test_collection.sqlite")
+    api.write_missions_to_database(missions)
+    res = api.get_missions_from_database({"goal": 80})
+    try:
+        assert len(res) == 1
+        assert res[0].name == "Komboka OP"
+        assert res[0].progress == 0
+    finally:
+        with database.get_session() as session:
+            session.query(mission.Mission).delete()
 # TODO: Be more robust in tests

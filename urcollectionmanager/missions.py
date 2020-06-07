@@ -11,7 +11,7 @@ BASE_MISSION_URL = "https://www.urban-rivals.com/missions/missions_page.php?"
 def get_mission_url(page_num: int, category: str, mission_status: str, url) -> str:
     """Returns a url for the requested parameters"""
     url = BASE_MISSION_URL if url is None else url
-    category = "all" if category is "" else category
+    category = "all" if category == "" else category
     return url + urlencode({'page': 0 if page_num is None else page_num,
                             'category': _convert_mission_category(category).value,
                             'state': _convert_mission_status(mission_status),

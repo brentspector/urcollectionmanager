@@ -104,7 +104,7 @@ description = "Python commitizen client tool"
 name = "commitizen"
 optional = false
 python-versions = ">=3.6,<4.0"
-version = "1.22.2"
+version = "1.22.3"
 
 [package.dependencies]
 colorama = ">=0.4.1,<0.5.0"
@@ -485,8 +485,8 @@ colorama = [
     {file = "colorama-0.4.3.tar.gz", hash = "sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"},
 ]
 commitizen = [
-    {file = "commitizen-1.22.2-py3-none-any.whl", hash = "sha256:ecbbc35ce81ee1808ca1f524190bf3d32caae1f744632bce2dbbf30dd1308e1d"},
-    {file = "commitizen-1.22.2.tar.gz", hash = "sha256:071ca483fe73319642686fdd81b3f2d0443cc17bc84269da7b586ec52d7b4f21"},
+    {file = "commitizen-1.22.3-py3-none-any.whl", hash = "sha256:3536558871083cdb50b99357142baf3d0fd27c8b3b3e0d3f0f1c01ea11257105"},
+    {file = "commitizen-1.22.3.tar.gz", hash = "sha256:b136b459083333c0c64d6f826fa13a63e7703c4dfcdef1a45557933ba06ab4ba"},
 ]
 decli = [
     {file = "decli-0.5.1-py3-none-any.whl", hash = "sha256:36dbda6cc9fdd7880b7ee141bccab048672307f4f419072aa1a394b01cb10a32"},

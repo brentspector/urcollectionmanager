@@ -1,3 +1,9 @@
+## 'v1.1.1 (2020-06-13')
+
+### Fix
+
+- **mission**: fix the issue where a completed mission caused tuple unpacking to fail
+
 ## v1.1.0 (2020-06-07)
 
 ### Feat

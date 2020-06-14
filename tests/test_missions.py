@@ -33,3 +33,15 @@ def test_create_mission(mocked_missions):
     res = missions.create_mission(soup.find_all("ul")[2].li)
     assert res.name == "BLACK MARKET - 500 Glorg-> 50 Millions"
     assert res.goal == 500
+
+# BELOW IS COMMENTED UNTIL THERE IS A WAY TO MODIFY WHAT DATA IS
+# GIVEN TO TOTAL_PROGRESS IN MISSION.PY
+# def test_create_mission_no_progress(mocked_missions):
+#     """Alt Path - Create Mission"""
+#     soup = http.convert_html_to_soup(mocked_missions)
+#     val = soup.find_all("ul")[2].li
+#     val.find("div", class_="progress-bar").text = "You have completed this mission"
+#     res = missions.create_mission(None)
+#     assert res.name == "BLACK MARKET - 500 Glorg-> 50 Millions"
+#     assert res.goal == 0
+#     assert res.progress == 0

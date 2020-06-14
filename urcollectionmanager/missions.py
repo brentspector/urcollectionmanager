@@ -29,7 +29,11 @@ def create_mission(row):
     name = next(itertools.islice(row.stripped_strings, 0, 1))
     description = next(itertools.islice(row.stripped_strings, 1, 2))
     total_progress = next(itertools.islice(row.stripped_strings, 2, 3))
-    progress, goal = str(total_progress).split("/")
+    try:
+        progress, goal = str(total_progress).split("/")
+    except BaseException:
+        progress = 0
+        goal = 0
     return Mission(name=name,
                    description=description,
                    progress=progress,

@@ -104,3 +104,4 @@ class MissionCategory(Enum):
     DOMINION = 51
     KOMBOKA = 53
     PARADOX = 54
+    BLACK_MARKET = 57

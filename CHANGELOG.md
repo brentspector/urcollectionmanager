@@ -1,16 +1,26 @@
-# 'v1.1.2 (2020-07-19')
+## 'v1.1.3 (2020-07-19')
+
+### Fix
+
+- **find-missions-function**: allow missions to be created when given a list of only 1 element
+
+## 'v1.1.2 (2020-07-19')
+
+### Refactor
+
+- **pull-master**: update local branch
 
 ### Fix
 
 - **mission-category**: add black market category to list of supported categories
 
-# 'v1.1.1 (2020-06-13')
+## 'v1.1.1 (2020-06-13')
 
 ### Fix
 
 - **mission**: fix the issue where a completed mission caused tuple unpacking to fail
 
-## v1.1.0 (2020-06-07)
+## 'v1.1.0 (2020-06-07')
 
 ### Feat
 

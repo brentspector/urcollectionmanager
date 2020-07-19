@@ -41,6 +41,13 @@ def mocked_missions(test_resource_dir):
         return pickle.load(f)
 
 
+@fixture(scope="module")
+def mocked_single_missions(test_resource_dir):
+    file_location = os.path.join(test_resource_dir, "single_missions.txt")
+    with open(file_location, "rb") as f:
+        return pickle.load(f)
+
+
 @fixture
 def create_file(request, test_resource_dir):
     """

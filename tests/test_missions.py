@@ -27,12 +27,28 @@ def test_find_missions(mocked_missions):
     assert res[0].name == "BLACK MARKET - 500 Glorg-> 50 Millions"
 
 
+def test_find_single_missions(mocked_single_missions):
+    """Happy Path - List of 1 Mission"""
+    res = missions.find_missions(http.convert_html_to_soup(mocked_single_missions))
+    assert len(res) == 1
+    assert res[0].name == "BLACK MARKET: 2 Enigma => 50M Clintz"
+
+
 def test_create_mission(mocked_missions):
     """Happy Path - Create Mission"""
     soup = http.convert_html_to_soup(mocked_missions)
     res = missions.create_mission(soup.find_all("ul")[2].li)
     assert res.name == "BLACK MARKET - 500 Glorg-> 50 Millions"
     assert res.goal == 500
+
+
+def test_create_single_mission(mocked_single_missions):
+    """Happy Path - Create Mission with Single Response"""
+    soup = http.convert_html_to_soup(mocked_single_missions)
+    res = missions.create_mission(soup.find_all("ul")[0].li)
+    assert res.name == "BLACK MARKET: 2 Enigma => 50M Clintz"
+    assert res.goal == 0  # This mock captured a completed mission, hence goal is 0
+
 
 # BELOW IS COMMENTED UNTIL THERE IS A WAY TO MODIFY WHAT DATA IS
 # GIVEN TO TOTAL_PROGRESS IN MISSION.PY
@@ -45,4 +61,3 @@ def test_create_mission(mocked_missions):
 #     assert res.name == "BLACK MARKET - 500 Glorg-> 50 Millions"
 #     assert res.goal == 0
 #     assert res.progress == 0
-

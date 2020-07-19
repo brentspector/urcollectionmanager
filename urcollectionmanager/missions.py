@@ -21,7 +21,10 @@ def get_mission_url(page_num: int, category: str, mission_status: str, url) -> s
 def find_missions(page: BeautifulSoup):
     """Returns list of Mission based on each row in the
     given BeautifulSoup missions page"""
-    return [create_mission(row) for row in page.find_all("ul")[2].find_all("li")]
+    ul_list = page.find_all("ul")
+    if len(ul_list) > 1:
+        return [create_mission(row) for row in ul_list[2].find_all("li")]
+    return [create_mission(row) for row in ul_list[0].find_all("li")]
 
 
 def create_mission(row):

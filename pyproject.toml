@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "urcollectionmanager"
-version = "1.1.1"
+version = "1.1.2"
 description = "API for Urban Rivals collection management"
 authors = ["Brent Spector <brent.spector@yahoo.com>"]
 license = "MIT"
@@ -27,7 +27,7 @@ aggressive = 2
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "1.1.1"
+version = "1.1.2"
 tag_format = "v$major.$minor.$patch$prerelease"
 
 [build-system]

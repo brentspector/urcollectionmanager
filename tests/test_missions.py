@@ -45,3 +45,4 @@ def test_create_mission(mocked_missions):
 #     assert res.name == "BLACK MARKET - 500 Glorg-> 50 Millions"
 #     assert res.goal == 0
 #     assert res.progress == 0
+
